@@ -87,6 +87,8 @@ int main()
     set<int> alphabeta, ending;
     string filename, reg;
     ifstream fin;
+    ofstream fout;
+    cout<<"Open File:"<<endl;
 	cin>>filename;
     fin.open(filename);
     if(fin.fail())
@@ -94,6 +96,10 @@ int main()
         cout<<"Unable to Open this File!"<<endl;
         return 0;
     }
+    cout<<"Print to File:"<<endl;
+    cin>>filename;
+    fout.open(filename);
+    
 	fin>>temp;
     for(int i = 0; i < temp; i++)
     {
@@ -111,13 +117,17 @@ int main()
     fin>>temp>>letter;
 
     EdgeList = reduce(EdgeList , alphabeta, temp, letter, ending);
+    fout<<EdgeList.size()<<endl;
     for(vector<vector<int>>::iterator i = EdgeList.begin(); i != EdgeList.end(); i++)
     {
         cout<<(*i)[0]<<"-- "<<(char)((*i)[2])<<" ->"<<(*i)[1]<<endl;
+        fout<<(*i)[0]<<"-- "<<(char)((*i)[2])<<" ->"<<(*i)[1]<<endl;
     }
+    fout<<ending.size();
     for(set<int>::iterator i = ending.begin(); i != ending.end(); i++)
     {
         cout<<(*i)<<' ';
+        fout<<(*i)<<endl;
     }
     cout<<endl;
 	return 0;
